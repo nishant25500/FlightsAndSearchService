@@ -1,4 +1,5 @@
-const { where } = require("sequelize");
+const { where, Op } = require("sequelize");
+
 const { City } = require("../models/index");
 
 class CityRepository {
@@ -12,7 +13,7 @@ class CityRepository {
       // });
 
       //this is using sequelize query
-      const city = await City.create({name});
+      const city = await City.create({ name });
       return city;
     } catch (error) {
       console.log("Smthng went wrong in repository layer");
@@ -42,6 +43,11 @@ class CityRepository {
           id: cityId,
         },
       });
+
+      //for getting updated data in return we use below approach
+      // const city = await City.findByPk(cityId);
+      // city.name = data.name;
+      // await city.save();
       return city;
     } catch (error) {
       console.log("Smthng went wrong in repository layer");
@@ -53,6 +59,27 @@ class CityRepository {
     try {
       const city = await City.findByPk(cityId);
       return city;
+    } catch (error) {
+      console.log("Smthng went wrong in repository layer");
+      throw error;
+    }
+  }
+
+  async getAllCity(filter) {
+    //filter can be empty
+    try {
+      if (filter.name) {
+        const cities = await City.findAll({
+          where: {
+            name: {
+              [Op.startsWith]: filter.name,
+            },
+          },
+        });
+        return cities;
+      }
+      const cities = await City.findAll();
+      return cities;
     } catch (error) {
       console.log("Smthng went wrong in repository layer");
       throw error;

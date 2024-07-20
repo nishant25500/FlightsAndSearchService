@@ -4,7 +4,7 @@ const cityService = new CityService();
 
 const create = (async (req,res)=>{  //POST, data-> req.body
     console.log(req.body);
-    console.log("Nishant");
+    // console.log("Nishant");
     try {
         const response = await cityService.createCity(req.body);
         return res.status(201).json({
@@ -86,9 +86,30 @@ const update = (async (req,res)=>{  //PATCH -> city/:id  data->req.body
     }
 })
 
+const getAll = (async (req,res)=>{
+    try {
+        const response = await cityService.getAllCity(req.query);
+        return res.status(200).json({
+            data: response,
+            message: "Successfully fetched cities",
+            err: {},
+            success: true
+           })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            data: {},
+            message: "Not able to update a city",
+            err: error,
+            success: false
+           })
+    }
+})
+
 module.exports = {
     create,
     destroy,
     get,
-    update
+    update,
+    getAll
 }
