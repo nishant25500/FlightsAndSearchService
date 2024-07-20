@@ -2,17 +2,17 @@ const { where } = require("sequelize");
 const { City } = require("../models/index");
 
 class CityRepository {
-  async createCity({ cityName }) {
+  async createCity({ name }) {
     try {
       //this is usign raw query
-      const query =
-        "INSERT INTO Cities (cityName, createdAt, updatedAt) VALUES (cityName, NOW(), NOW())";
-      const city = await sequelize.query(query, {
-        type: sequelize.QueryTypes.INSERT,
-      });
+      // const query =
+      //   "INSERT INTO Cities (cityName, createdAt, updatedAt) VALUES (cityName, NOW(), NOW())";
+      // const city = await sequelize.query(query, {
+      //   type: sequelize.QueryTypes.INSERT,
+      // });
 
       //this is using sequelize query
-      // const city = await City.create({ cityName });
+      const city = await City.create({name});
       return city;
     } catch (error) {
       console.log("Smthng went wrong in repository layer");

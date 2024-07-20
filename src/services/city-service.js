@@ -24,6 +24,26 @@ class CityService{
             throw error;
         }
     }
-}
 
+    async getCity(cityId){
+        try {
+            const res = await this.cityRepository.getCity(cityId);
+            return res;
+        } catch (error) {
+            console.log("Smthng went wrong in service layer");
+            throw error;
+        }
+    }
+
+    async updateCity(cityId,data){
+        try {
+            const res = await this.cityRepository.updateCity(cityId,data);
+            return res;
+        } catch (error) {
+            console.log("Smthng went wrong in service layer");
+            throw error;
+        }
+    }
+}
+ 
 module.exports = CityService;
