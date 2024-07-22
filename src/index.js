@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const ApiRoutes = require("./routes/index");
 
 const { PORT } = require("./config/serverConfig");
-const { City, Airport } = require("./models/index");
+const { City, Airport,Airplane } = require("./models/index");
 
 const setupAndStartServer = async () => {
   const app = express();
@@ -32,6 +32,8 @@ const setupAndStartServer = async () => {
    //  });
 
    //  console.log(airports);
+
+  //  await Airport.truncate();
   });
 };
 
