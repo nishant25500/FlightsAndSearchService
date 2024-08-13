@@ -21,9 +21,9 @@ class CityRepository {
     }
   }
 
-  async createAllCity(data){
+  async createAllCity(data) {
     try {
-      const city = await City.bulkCreate(data,{fields: ['name']});
+      const city = await City.bulkCreate(data, { fields: ["name"] });
       return city;
     } catch (error) {
       console.log("Smthng went wrong in repository layer");

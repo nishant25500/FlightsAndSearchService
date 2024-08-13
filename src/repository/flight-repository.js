@@ -1,16 +1,15 @@
-const {Flights} = require('../models/index');
+const { Flights } = require("../models/index");
 
-class FlightRepository{
-
-    async createFlight(data){
-        try {
-            const flight = await Flights.create(data);
-            return flight;
-        } catch (error) {
-            console.log("Smthng went wrong in repository layer");
-            throw(error);
-        }
+class FlightRepository {
+  async createFlight(data) {
+    try {
+      const flight = await Flights.create(data);
+      return flight;
+    } catch (error) {
+      console.log("Smthng went wrong in repository layer");
+      throw error;
     }
+  }
 }
 
 module.exports = FlightRepository;
